@@ -1,0 +1,506 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Width and height is total size of element */
+}
+
+.firstSection {
+    background-color: #fffbf7;
+    padding: 50px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.secondSection {
+    background-color: #fffbf7;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.thirdSection {
+    background-color: #fffbf7;
+    padding: 50px;
+    height: 100vh;
+    display: flex;
+    justify-content: space-between;
+}
+
+h1 {
+    font-size: 150px;
+    color: #FF0080;
+    font-weight: normal;
+}
+
+h2 {
+    font-size: 60px;
+    color: #FF0080;
+    font-weight: normal;
+}
+
+h3 {
+    font-size: 30px;
+    color: #FF0080;
+    font-weight: normal;
+}
+
+a {
+    font-size: 30px;
+    color: #FF0080;
+    font-weight: normal;
+}
+
+p {
+    font-size: 30px;
+}
+
+#bottom {
+    display: flex;
+    justify-content: space-between;
+}
+
+#top {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+#middle {
+    justify-items: center;
+    align-items: center;
+}
+
+#number {
+    text-align: right;
+}
+
+#linkedin {
+    margin-right: 30px;
+}
+
+.links {
+    text-decoration: none;
+}
+
+.slideshow-container {
+    position: relative; /* The original position of children stays occupied even if child is moved out of place*/
+}
+
+.slide {
+    display: none;
+    margin-bottom: 30px;
+}
+
+.car_imgs:hover {
+    transform:scale(1.02);
+}
+
+.car_imgs {
+    transition: transform 0.3s ease-in-out;
+}
+
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top:50%;
+    width: 70px;
+    height: 70px;
+    margin-top: -22px;
+    padding: 16px;
+    padding-left: 28px;
+    color:#FF0080;
+    font-weight: bold;
+    font-size: 25px;
+    transition: 0.6 ease;
+    border-radius: 50%;
+    user-select: none;
+}
+
+.next {
+    padding-left: 30px;
+    right: 0; /* Similar to padding but it moves the element inside container */
+    border-radius: 50%;
+}
+
+.prev:hover, .next:hover {
+    background-color: #ffe3f176;
+}
+
+.dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #ffafd771;
+    border-radius: 50%;
+    display: inline-block; /* keeps width and height but aligns horizontally instead of vertically  */
+    transition: background-color 0.6 ease;
+}
+
+.active, .dot:hover {
+    background-color: #FF0080;
+}
+
+.fade {
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+
+@keyframes fade {
+    from {opacity: .4}
+    to {opacity: 1}
+}
+
+.half {
+    width: 50%;
+}
+
+.text {
+    display: flex;
+    flex-direction: column;
+    text-align: justify;
+    justify-content: center;
+}
+
+.car_imgs {
+    width: 850px;
+    height: 500px;
+    margin-left: 100px;
+    margin-right: 100px;
+    box-shadow: 0px 5px 20px #AAA;
+}
+
+.short {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+}
+
+.long {
+    display: flex;
+    flex-direction: column;
+    width: 55%;
+}
+
+.pageFirstSection {
+    background-color: #fffbf7;
+    display: flex;
+    height: 100vh;
+}
+
+.pageSecondSection {
+    background-color: #fffbf7;
+    display: flex;
+    height: 100vh;
+}
+
+.pageThirdSection {
+    background-color: #fffbf7;
+    display: flex;
+    height: 100vh;
+}
+
+.pageImgs {
+    height: 100vh;
+}
+
+.colors {
+    width: 60%;
+    margin-top: 60px;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    text-align: justify;
+    justify-content: center;
+    padding: 40px;
+}
+
+.center{
+    align-items: center;
+}
+
+.black {
+    color:black;
+}
+
+.title {
+    font-weight: bold;
+}
+
+.subtitle {
+    font-size: 35px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    background-color: #ffffffd6;
+    width: 100%;
+    border-bottom-style: solid;
+    border-bottom-width: thin;
+    border-bottom-color: rgb(208, 208, 208);
+    padding: 3px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.image img {
+    height: 660px;
+    width: 620px;
+}
+
+.header {
+    font-size: 25px;
+}
+
+@media (max-width: 600px) {
+    body {
+        overflow-x: hidden;
+        touch-action: pan-y;
+        overscroll-behavior-x: none;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    .firstSection {
+        background-color: #fffbf7;
+        padding: 50px;
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .secondSection {
+        background-color: #fffbf7;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .thirdSection {
+        background-color: #fffbf7;
+        padding: 50px;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+
+    h1 {
+    font-size: 50px;
+    color: #FF0080;
+    font-weight: normal;
+    }
+
+    h2 {
+        font-size: 30px;
+        color: #FF0080;
+        font-weight: normal;
+    }
+
+    h3 {
+        font-size: 10px;
+        color: #FF0080;
+        font-weight: normal;
+    }
+
+        
+    a {
+        font-size: 30px;
+        color: #FF0080;
+        font-weight: normal;
+    }
+
+    p {
+        font-size: 10px;
+    }
+
+    .image img {
+        height: 360px;
+        width: 320px;
+    }
+
+    #bottom {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    #top {
+        display: flex;
+        justify-content: space-between;
+    }
+
+
+    #middle {
+        justify-items: center;
+        align-items: center;
+    }
+
+    #number {
+        text-align: right;
+    }
+
+    #linkedin {
+        margin-right: 30px;
+    }
+
+    .links {
+        text-decoration: none;
+    }
+
+    .slideshow-container {
+        position: relative; /* The original position of children stays occupied even if child is moved out of place*/
+    }
+
+    .slide {
+        display:none;
+        margin-bottom: 30px;
+    }
+
+    .prev, .next {
+        cursor: pointer;
+        
+        width: 70px;
+        height: 70px;
+        color:#FF0080;
+        font-weight: bold;
+        font-size: 25px;
+        transition: 0.6 ease;
+        border-radius: 50%;
+        user-select: none;
+    }
+    
+
+    .dot {
+        cursor: pointer;
+        height: 30px;
+        width: 30px;
+        margin: 0 2px;
+        background-color: #ffafd771;
+        border-radius: 50%;
+        display: inline-block; /* keeps width and height but aligns horizontally instead of vertically  */
+        transition: background-color 0.6 ease;
+    }
+
+    .active, .dot:hover {
+        background-color: #FF0080;
+    }
+
+    .fade {
+        animation-name: fade;
+        animation-duration: 1.5s;
+    }
+
+    @keyframes fade {
+        from {opacity: .4}
+        to {opacity: 1}
+    }
+
+    .half {
+        width: 50%;
+    }
+
+    .text {
+        display: flex;
+        flex-direction: column;
+        text-align: justify;
+        justify-content: center;
+    }
+
+    .car_imgs {
+        width: 380px;
+        height: 230px;
+        box-shadow: 0px 5px 20px #AAA;
+    }
+
+    .short {
+        width: 45%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .long {
+        display: flex;
+        flex-direction: column;
+        width: 55%;
+    }
+
+    .pageFirstSection {
+        background-color: #fffbf7;
+        display: flex;
+        height: 100vh;
+    }
+
+    .pageSecondSection {
+        background-color: #fffbf7;
+        display: flex;
+        height: 100vh;
+    }
+
+    .pageThirdSection {
+        background-color: #fffbf7;
+        display: flex;
+        height: 100vh;
+    }
+
+    .pageImgs {
+        height: 100vh;
+    }
+
+    .colors {
+        width: 60%;
+        margin-top: 60px;
+    }
+
+    .info {
+        display: flex;
+        flex-direction: column;
+        text-align: justify;
+        justify-content: center;
+        padding: 40px;
+    }
+
+    .center{
+        align-items: center;
+    }
+
+    .black {
+        color:black;
+    }
+
+    .title {
+        font-weight: bold;
+    }
+
+    .subtitle {
+        font-size: 35px;
+    }
+
+    header {
+        display: flex;
+        justify-content: space-between;
+        position: fixed;
+        background-color: #ffffffd6;
+        width: 100%;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        border-bottom-color: rgb(208, 208, 208);
+        padding: 3px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+}

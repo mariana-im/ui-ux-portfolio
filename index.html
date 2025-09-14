@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <title>Mariana's Portfolio</title>
+    <link rel="icon" type="image/x-icon" href="star.webp">
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <section class="firstSection">
+        <div id="top">
+            <a class="links" href="#secondSection">
+                <h3>PROJECTS</h3>
+            </a>
+            <a class="links" href="#thirdSection">
+                <h3>ABOUT ME</h3>
+            </a>
+            <a class="links" href="resume.html" target="_blank">RESUME</a>
+        </div>
+
+        <div id="middle">
+            <h1>PORTFOLIO</h1>
+            <p>Mariana Islas Mondragón</p>
+        </div>
+
+
+        <div id="bottom">
+            <div>
+                <h3><br></h3>
+                <a id="linkedin" href="https://linkedin.com/in/mariana-islas-92837a330" target="_blank">LinkedIn</a>
+                <a href="https://github.com/mariana-im" target="_blank">GitHub</a>
+            </div>
+
+            <div>
+                <h3 id="number">52 662 165 4217</h3>
+                <h3>marianaislasm2004@gmail.com</h3>
+            </div>
+        </div>
+    </section>
+
+    <section class="secondSection" id="secondSection">
+        <!--Images-->
+        <div class="slideshow-container">
+            <div class="slide fade">
+                <a href="/carousel_pages/motionlab.html"><img class="car_imgs" src="carousel_imgs/motionlab.png"></a>
+            </div>
+
+            <div class="slide fade">
+                <a href="/carousel_pages/sazonlocal.html"><img class="car_imgs" src="carousel_imgs/sazonlocal.png"></a>
+            </div>
+
+            <div class="slide fade">
+                <a href="/carousel_pages/bajosol.html"><img class="car_imgs" src="carousel_imgs/bajosol.png"></a>
+            </div>
+
+            <div class="slide fade">
+                <a href="/carousel_pages/corazon.html"><img class="car_imgs" src="carousel_imgs/corazon.png"></a>
+            </div>
+
+            <div class="slide fade">
+                <a href="/carousel_pages/dulces.html"><img class="car_imgs" src="carousel_imgs/dulces.png"></a>
+            </div>
+
+            <!--Arrows-->
+            <a class="prev" onclick="plusSlides(-1)"> &#10094; </a>
+            <a class="next" onclick="plusSlides(1)"> &#10095; </a>
+        </div>
+
+
+
+        <!-- Bottom dots-->
+        <div style="text-align:center">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+            <span class="dot" onclick="currentSlide(4)"></span>
+            <span class="dot" onclick="currentSlide(5)"></span>
+        </div>
+    </section>
+
+    <section class="thirdSection" id="thirdSection">
+        <div class="half text">
+            <h2 class="black title links">About Me</h2>
+            <p> <br> Hello! I am Mariana Islas a designer that is passionate about creating visual experiences that
+                communicate with intention. <br> <br> I have participated in educational, cultural, and digital
+                projects, where design stands out for its aesthetics, clarity, and ease of use. <br> <br> I love
+                combining creativity with logic, always striving for each project to make an impact and create a genuine
+                connection with people.</p>
+        </div>
+
+        <div class="image">
+            <img src="me.png">
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

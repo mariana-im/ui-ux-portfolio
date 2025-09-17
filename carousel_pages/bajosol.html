@@ -4,55 +4,103 @@
         <title>Mariana's Portfolio</title>
         <link rel="icon" type="image/x-icon" href="../star.webp">
         <link rel="stylesheet" href="../style.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="UTF-8">
     </head>
     <body>
-        <header>
+        <div class="desktop-nav">
+            <header>
+                <a class="links black header" href="../index.html">  &#10094; </a>
+                <a class="links black header" href="../resume.html" target="_blank"> &#128462;  Resume </a>
+            </header>
+            <div class="pageFirstSection">
+                <div class="short info">
+                    <h2 class="black title" style="font-size: 57px;">Bajo el Sol y la Cerveza</h2>
+                    <h3 class="black subtitle">IoT Monitoring System<br><br></h3>
+
+                    <p>
+                        Bajo el Sol y la Cerveza is a web-based IoT monitoring system designed to track refrigerated containers in real time. A microcontroller sends structured JSON data through Wi-Fi to Node-RED, which stores it in a MySQL database and displays it on a responsive dashboard. Users can monitor temperature, humidity, load level, and door status, with alerts for values outside of set ranges.<br><br>
+                        The system combines data visualization with intuitive design, making it easy for users to understand container conditions at a glance and respond quickly to any issues.
+                    </p>
+                </div>
+
+                <div class="long">
+                    <img class="pageImgs" src="bajosol/page1.png">
+                </div>
+            </div>
+
+            <div class="pageSecondSection">
+                <div class="short">
+                    <img class="pageImgs" src="bajosol/page2.png">
+                </div>
+
+                <div class="long info">
+                    <h3 class="black subtitle">Problem Statement</h3>
+                    <p>Refrigerated containers require strict control to preserve product quality, but manual inspections are slow and prone to errors. Current monitoring tools can be expensive and complex. This project set out to design an affordable, reliable solution to automate data capture and give users real-time visibility.<br><br><br></p>
+
+                    <h3 class="black subtitle">Design Process</h3>
+                    <p>The design began by translating user needs into requirements. Wireframes and prototypes were created to test layout and interaction. The backend integrated JavaScript, Node-RED, PHP, and MySQL, while the frontend, used HTML and CSS.</p>
+                </div>
+            </div>
+
+            <div class="pageThirdSection">
+                <div class="short info center">
+                    <p>
+                        The system provides secure login, an interface displaying both real-time conditions and stored data, and visual alerts for abnormal readings. It includes container pages, a user page, a team information page, a navigation sidebar, and a contact section, all following a consistent design language. The architecture is designed to be flexible, enabling future scalability with new sensors or services.<br><br>
+                        The prototype demonstrated that IoT integration can make monitoring faster, cheaper, and more reliable. By combining real-time data with historical storage, it provides both immediate responses to critical events and insights into long-term performance.
+                    </p>
+                    <img class="colors" src="bajosol/colors.png">
+                </div>
+
+                <div class="long">
+                    <img class="pageImgs" src="bajosol/page3.png">
+                </div>
+            </div>
+        </div>
+            
+        <div class="phone-nav">
+            <header>
             <a class="links black header" href="../index.html">  &#10094; </a>
             <a class="links black header" href="../resume.html" target="_blank"> &#128462;  Resume </a>
-        </header>
-        <div class="pageFirstSection">
-            <div class="short info">
-                <h2 class="black title" style="font-size: 57px;">Bajo el Sol y la Cerveza</h2>
-                <h3 class="black subtitle">IoT Monitoring System<br><br></h3>
+            </header>
+            <div class="pages">
+                <div class="pageFirstSection">
+                    <h2 class="black title">Bajo el Sol y la Cerveza</h2>
+                    <h3 class="black subtitle">IoT Monitoring System <br><br></h3>
 
-                <p>
-                    Bajo el Sol y la Cerveza is a web-based IoT monitoring system designed to track refrigerated containers in real time. A microcontroller sends structured JSON data through Wi-Fi to Node-RED, which stores it in a MySQL database and displays it on a responsive dashboard. Users can monitor temperature, humidity, load level, and door status, with alerts for values outside of set ranges.<br><br>
-                    The system combines data visualization with intuitive design, making it easy for users to understand container conditions at a glance and respond quickly to any issues.
-                </p>
+                    <p>
+                        Bajo el Sol y la Cerveza is a web-based IoT monitoring system designed to track refrigerated containers in real time. A microcontroller sends structured JSON data through Wi-Fi to Node-RED, which stores it in a MySQL database and displays it on a responsive dashboard. Users can monitor temperature, humidity, load level, and door status, with alerts for values outside of set ranges.<br><br>
+                        
+                        The system combines data visualization with intuitive design, making it easy for users to understand container conditions at a glance and respond quickly to any issues.
+                    </p>
+
+                    <img class="pageImgs" src="bajosol/page1.png">
+
+                </div>
+
+                <div class="pageSecondSection">
+                    <h3 class="black section">Problem Statement</h3>
+                    <p class="section-paragraph">Refrigerated containers require strict control to preserve product quality, but manual inspections are slow and prone to errors. Current monitoring tools can be expensive and complex. This project set out to design an affordable, reliable solution to automate data capture and give users real-time visibility.<br><br><br></p>
+
+                    <h3 class="black section">Design Process</h3>
+                    <p class="section-paragraph">The design began by translating user needs into requirements. Wireframes and prototypes were created to test layout and interaction. The backend integrated JavaScript, Node-RED, PHP, and MySQL, while the frontend, used HTML and CSS.</p>
+
+                    <img class="pageImgs" src="bajosol/page2.png">
+                </div>
+
+                <div class="pageThirdSection">
+                    <p class="section-paragraph">
+                        The project featured a simple blog design with a homepage, recipe entries, and a consistent visual style that students could customize. By keeping the code streamlined and the design accessible, the project encouraged creativity while reinforcing key programming concepts and introducing good habits in web structure.<br><br>
+                        
+                        The cooking blog served as an effective final project that allowed students to apply everything they had learned in a practical and enjoyable way. It not only reinforced their coding skills but also gave them a tangible website they could personalize and share.
+                    </p>
+                    
+                    <img class="pageImgs" src="bajosol/page3.png">
+
+                    <img class="colors" src="bajosol/colors.png">
+                </div>
             </div>
-
-            <div class="long">
-                <img class="pageImgs" src="bajosol/page1.png">
-            </div>
-        </div>
-
-        <div class="pageSecondSection">
-            <div class="short">
-                <img class="pageImgs" src="bajosol/page2.png">
-            </div>
-
-            <div class="long info">
-                <h3 class="black subtitle">Problem Statement</h3>
-                <p>Refrigerated containers require strict control to preserve product quality, but manual inspections are slow and prone to errors. Current monitoring tools can be expensive and complex. This project set out to design an affordable, reliable solution to automate data capture and give users real-time visibility.<br><br><br></p>
-
-                <h3 class="black subtitle">Design Process</h3>
-                <p>The design began by translating user needs into requirements. Wireframes and prototypes were created to test layout and interaction. The backend integrated JavaScript, Node-RED, PHP, and MySQL, while the frontend, used HTML and CSS.</p>
-            </div>
-        </div>
-
-        <div class="pageThirdSection">
-            <div class="short info center">
-                <p>
-                    The system provides secure login, an interface displaying both real-time conditions and stored data, and visual alerts for abnormal readings. It includes container pages, a user page, a team information page, a navigation sidebar, and a contact section, all following a consistent design language. The architecture is designed to be flexible, enabling future scalability with new sensors or services.<br><br>
-                    The prototype demonstrated that IoT integration can make monitoring faster, cheaper, and more reliable. By combining real-time data with historical storage, it provides both immediate responses to critical events and insights into long-term performance.
-                </p>
-                <img class="colors" src="bajosol/colors.png">
-            </div>
-
-            <div class="long">
-                <img class="pageImgs" src="bajosol/page3.png">
-            </div>
+            
         </div>
     </body>
 </html>

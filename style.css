@@ -4,6 +4,10 @@
     box-sizing: border-box; /* Width and height is total size of element */
 }
 
+.phone-nav {
+    display: none;
+}
+
 .firstSection {
     background-color: #fffbf7;
     padding: 50px;
@@ -90,17 +94,25 @@ p {
     position: relative; /* The original position of children stays occupied even if child is moved out of place*/
 }
 
-.slide {
+.slide-desktop {
     display: none;
     margin-bottom: 30px;
 }
 
 .car_imgs:hover {
-    transform:scale(1.02);
+    transform: scale(1.02);
 }
 
 .car_imgs {
     transition: transform 0.3s ease-in-out;
+}
+
+.links:hover {
+    transform: scale(1.1);
+}
+
+.links {
+    transition: transform 0.3s ease-in-out
 }
 
 .prev, .next {
@@ -130,7 +142,7 @@ p {
     background-color: #ffe3f176;
 }
 
-.dot {
+.dot-desktop {
     cursor: pointer;
     height: 15px;
     width: 15px;
@@ -141,7 +153,7 @@ p {
     transition: background-color 0.6 ease;
 }
 
-.active, .dot:hover {
+.active, .dot-desktop:hover {
     background-color: #FF0080;
 }
 
@@ -261,6 +273,20 @@ header {
 }
 
 @media (max-width: 600px) {
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box; /* Width and height is total size of element */
+    }
+
+    .desktop-nav {
+        display: none;
+    }
+
+    .phone-nav {
+        display: block;
+    }
+
     body {
         overflow-x: hidden;
         touch-action: pan-y;
@@ -272,9 +298,11 @@ header {
 
     .firstSection {
         background-color: #fffbf7;
-        padding: 50px;
+        padding: 25px;
+        padding-bottom: 40px;
+        padding-top: 40px;
         height: 100vh;
-        width: 100vw;
+        width: 100%;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -283,6 +311,7 @@ header {
     .secondSection {
         background-color: #fffbf7;
         height: 100vh;
+        width: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -293,14 +322,18 @@ header {
         background-color: #fffbf7;
         padding: 50px;
         height: 100vh;
+        width: 100%;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        justify-content: normal;
+        text-align: justify;
+        align-items: center;
+        justify-content: center;
     }
 
 
     h1 {
-    font-size: 50px;
+    font-size: 60px;
     color: #FF0080;
     font-weight: normal;
     }
@@ -312,30 +345,32 @@ header {
     }
 
     h3 {
-        font-size: 10px;
+        font-size: 20px;
         color: #FF0080;
         font-weight: normal;
     }
 
         
     a {
-        font-size: 30px;
+        font-size: 20px;
         color: #FF0080;
         font-weight: normal;
     }
 
     p {
-        font-size: 10px;
+        font-size: 20px;
     }
 
     .image img {
-        height: 360px;
-        width: 320px;
+        margin-top: 65px;
+        height: 270px;
+        width: 260px;
+        border-radius: 50%;
     }
 
     #bottom {
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
     }
 
     #top {
@@ -350,7 +385,7 @@ header {
     }
 
     #number {
-        text-align: right;
+        text-align: center;
     }
 
     #linkedin {
@@ -365,14 +400,14 @@ header {
         position: relative; /* The original position of children stays occupied even if child is moved out of place*/
     }
 
-    .slide {
+    .slide-phone {
         display:none;
         margin-bottom: 30px;
     }
 
     .prev, .next {
         cursor: pointer;
-        
+        margin-top: 92px;
         width: 70px;
         height: 70px;
         color:#FF0080;
@@ -380,14 +415,18 @@ header {
         font-size: 25px;
         transition: 0.6 ease;
         border-radius: 50%;
+        
         user-select: none;
     }
-    
 
-    .dot {
+    .next {
+        border-radius: 50%;
+    }
+
+    .dot-phone {
         cursor: pointer;
-        height: 30px;
-        width: 30px;
+        height: 20px;
+        width: 20px;
         margin: 0 2px;
         background-color: #ffafd771;
         border-radius: 50%;
@@ -395,7 +434,7 @@ header {
         transition: background-color 0.6 ease;
     }
 
-    .active, .dot:hover {
+    .active, .dot-phone:hover {
         background-color: #FF0080;
     }
 
@@ -421,48 +460,56 @@ header {
     }
 
     .car_imgs {
-        width: 380px;
-        height: 230px;
+        width: 310px;
+        height: 200px;
+        margin: 0;
         box-shadow: 0px 5px 20px #AAA;
     }
 
-    .short {
-        width: 45%;
-        display: flex;
-        flex-direction: column;
-    }
-
-    .long {
-        display: flex;
-        flex-direction: column;
-        width: 55%;
+    .pages {
+        padding-top: 70px;
+        background-color: #fffbf7;
     }
 
     .pageFirstSection {
+        padding: 40px;
+        padding-bottom: 0px;
         background-color: #fffbf7;
         display: flex;
-        height: 100vh;
+        flex-direction: column;
+        height: auto;
+        width: 100%;
+        text-align: justify;
     }
 
     .pageSecondSection {
         background-color: #fffbf7;
         display: flex;
-        height: 100vh;
+        flex-direction: column;
+        height: auto;
+        width: 100%;
+        padding: 40px;
+        
     }
 
     .pageThirdSection {
         background-color: #fffbf7;
         display: flex;
-        height: 100vh;
+        padding: 40px;
+        padding-top: 0px;
+        flex-direction: column;
+        height: auto;
+        width: 100%;
     }
 
     .pageImgs {
-        height: 100vh;
+        height: 270px;
+        margin-top: 30px;
     }
 
     .colors {
-        width: 60%;
-        margin-top: 60px;
+        margin: 30px auto 0 auto;
+        display: block;
     }
 
     .info {
@@ -482,11 +529,14 @@ header {
     }
 
     .title {
-        font-weight: bold;
+        font-weight: normal;
+        text-align: center;
+        font-size: 50px;
     }
 
     .subtitle {
-        font-size: 35px;
+        font-size: 20px;
+        text-align: center;
     }
 
     header {
@@ -498,9 +548,17 @@ header {
         border-bottom-style: solid;
         border-bottom-width: thin;
         border-bottom-color: rgb(208, 208, 208);
-        padding: 3px;
+        padding: 25px;
         padding-left: 20px;
         padding-right: 20px;
     }
 
+    .section {
+        font-size: 25px;
+        text-align: left;
+    }
+
+    .section-paragraph {
+        text-align: justify;
+    }
 }

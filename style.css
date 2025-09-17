@@ -380,6 +380,7 @@ header {
 
 
     #middle {
+        flex-direction: column;
         justify-items: center;
         align-items: center;
         display: flex;

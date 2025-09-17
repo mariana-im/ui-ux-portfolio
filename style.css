@@ -382,6 +382,8 @@ header {
     #middle {
         justify-items: center;
         align-items: center;
+        display: flex;
+        justify-content: center;
     }
 
     #number {

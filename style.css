@@ -510,6 +510,13 @@ header {
         margin-top: 30px;
     }
 
+    .pageImgsMiddle {
+        height: 270px;
+        margin-top: 30px;
+        width: 80%;
+        margin: 30px auto auto auto;
+    }
+
     .colors {
         margin: 30px auto 0 auto;
         display: block;

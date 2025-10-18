@@ -1,3 +1,9 @@
+@font-face {
+  font-family: "Sinoreta";
+  src: url("/fonts/Sinoreta.otf") format("opentype");
+  font-display: swap; /* mejora la experiencia de carga */
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -19,11 +25,12 @@
 
 .secondSection {
     background-color: #fffbf7;
-    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding-top: 130px;
+    padding-bottom: 80px;
 }
 
 .thirdSection {
@@ -38,28 +45,33 @@ h1 {
     font-size: 150px;
     color: #FF0080;
     font-weight: normal;
+    font-family: "Raleway", sans-serif;
 }
 
 h2 {
     font-size: 60px;
     color: #FF0080;
     font-weight: normal;
+    font-family: "Raleway", sans-serif;
 }
 
 h3 {
     font-size: 30px;
     color: #FF0080;
     font-weight: normal;
+    font-family: "Raleway", sans-serif;
 }
 
 a {
     font-size: 30px;
     color: #FF0080;
     font-weight: normal;
+    font-family: 'Bellota Text', cursive;
 }
 
 p {
-    font-size: 30px;
+    font-size: 28px;
+    font-family: 'Bellota Text', cursive;
 }
 
 #bottom {
@@ -90,15 +102,6 @@ p {
     text-decoration: none;
 }
 
-.slideshow-container {
-    position: relative; /* The original position of children stays occupied even if child is moved out of place*/
-}
-
-.slide-desktop {
-    display: none;
-    margin-bottom: 30px;
-}
-
 .car_imgs:hover {
     transform: scale(1.02);
 }
@@ -113,48 +116,6 @@ p {
 
 .links {
     transition: transform 0.3s ease-in-out
-}
-
-.prev, .next {
-    cursor: pointer;
-    position: absolute;
-    top:50%;
-    width: 70px;
-    height: 70px;
-    margin-top: -22px;
-    padding: 16px;
-    padding-left: 28px;
-    color:#FF0080;
-    font-weight: bold;
-    font-size: 25px;
-    transition: 0.6 ease;
-    border-radius: 50%;
-    user-select: none;
-}
-
-.next {
-    padding-left: 30px;
-    right: 0; /* Similar to padding but it moves the element inside container */
-    border-radius: 50%;
-}
-
-.prev:hover, .next:hover {
-    background-color: #ffe3f176;
-}
-
-.dot-desktop {
-    cursor: pointer;
-    height: 15px;
-    width: 15px;
-    margin: 0 2px;
-    background-color: #ffafd771;
-    border-radius: 50%;
-    display: inline-block; /* keeps width and height but aligns horizontally instead of vertically  */
-    transition: background-color 0.6 ease;
-}
-
-.active, .dot-desktop:hover {
-    background-color: #FF0080;
 }
 
 .fade {
@@ -179,13 +140,24 @@ p {
 }
 
 .car_imgs {
-    width: 850px;
-    height: 500px;
-    margin-left: 100px;
-    margin-right: 100px;
+    width: 440px;
+    margin: 20px;
+    height: 300px;
     box-shadow: 0px 5px 20px #AAA;
 }
 
+.line {
+    width: 1340px;
+    height: 70px;
+    margin-bottom: 40px;
+}
+
+.mobile-line {
+    width: 1340px;
+    height: 80px;
+    margin-bottom: 40px;
+    margin-top: 80px;
+}
 .short {
     width: 45%;
     display: flex;
@@ -272,6 +244,41 @@ header {
     font-size: 25px;
 }
 
+.web-container-top {
+    display: flex;
+}
+
+.web-container-bottom {
+    display: flex;
+}
+
+.mobile-container-top {
+    display: flex;
+}
+
+.autoShow {
+    animation: text-appear both;
+    animation-timeline: view();
+}
+
+@keyframes text-appear {
+    from {
+        opacity: .7;
+        transform: translateY(100px);
+        scale: 0.7;
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        scale: 1;
+    }
+}
+
+.fix {
+    padding-left: 22px;
+}
+
 @media (max-width: 600px) {
     * {
         margin: 0;
@@ -287,19 +294,59 @@ header {
         display: block;
     }
 
+    @keyframes text-appear {
+    from {
+        opacity: .7;
+        transform: translateY(100px) scale(0.7);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    }
+
+    .autoShow {
+    animation: text-appear 0.8s ease both;
+    }
+
+
+    .car_imgs {
+    width: 150px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin: 10px;
+    height: 100px;
+    box-shadow: 0px 5px 20px #AAA;
+    }
+
+    .line {
+        width: 380px;
+        height: 25px;
+        margin-bottom: 40px;
+    }
+
+    .mobile-line {
+        width: 380px;
+        height: 25px;
+        margin-top: 40px;
+    }
+
     body {
         overflow-x: hidden;
-        touch-action: pan-y;
+        touch-action: auto;
         overscroll-behavior-x: none;
         width: 100%;
         margin: 0;
         padding: 0;
     }
 
+
     .firstSection {
         background-color: #fffbf7;
         padding: 25px;
         padding-bottom: 40px;
+        margin-bottom: 40px;
         padding-top: 40px;
         height: 100vh;
         width: 100%;
@@ -312,6 +359,8 @@ header {
         background-color: #fffbf7;
         height: 100vh;
         width: 100%;
+        padding: 0;
+        margin: 0;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -320,6 +369,7 @@ header {
 
     .thirdSection {
         background-color: #fffbf7;
+        margin-top: 0;
         padding: 50px;
         height: 100vh;
         width: 100%;
@@ -333,9 +383,9 @@ header {
 
 
     h1 {
-    font-size: 60px;
-    color: #FF0080;
-    font-weight: normal;
+        font-size: 60px;
+        color: #FF0080;
+        font-weight: normal;
     }
 
     h2 {
@@ -399,48 +449,6 @@ header {
         text-decoration: none;
     }
 
-    .slideshow-container {
-        position: relative; /* The original position of children stays occupied even if child is moved out of place*/
-    }
-
-    .slide-phone {
-        display:none;
-        margin-bottom: 30px;
-    }
-
-    .prev, .next {
-        cursor: pointer;
-        margin-top: 92px;
-        width: 70px;
-        height: 70px;
-        color:#FF0080;
-        font-weight: bold;
-        font-size: 25px;
-        transition: 0.6 ease;
-        border-radius: 50%;
-        
-        user-select: none;
-    }
-
-    .next {
-        border-radius: 50%;
-    }
-
-    .dot-phone {
-        cursor: pointer;
-        height: 20px;
-        width: 20px;
-        margin: 0 2px;
-        background-color: #ffafd771;
-        border-radius: 50%;
-        display: inline-block; /* keeps width and height but aligns horizontally instead of vertically  */
-        transition: background-color 0.6 ease;
-    }
-
-    .active, .dot-phone:hover {
-        background-color: #FF0080;
-    }
-
     .fade {
         animation-name: fade;
         animation-duration: 1.5s;
@@ -460,13 +468,6 @@ header {
         flex-direction: column;
         text-align: justify;
         justify-content: center;
-    }
-
-    .car_imgs {
-        width: 310px;
-        height: 200px;
-        margin: 0;
-        box-shadow: 0px 5px 20px #AAA;
     }
 
     .pages {
@@ -507,13 +508,15 @@ header {
 
     .pageImgs {
         height: 270px;
+        width: 300px;
+        margin: 30px auto auto auto;
         margin-top: 30px;
     }
 
     .pageImgsMiddle {
         height: 270px;
         margin-top: 30px;
-        width: 80%;
+        width: 220px;
         margin: 30px auto auto auto;
     }
 

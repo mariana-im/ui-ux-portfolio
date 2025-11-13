@@ -1,6 +1,6 @@
 const PortfolioPage = () => {
     return (
-        <div className="sm:min-h-screen justify-between flex flex-col bg-[#FFF7F1] p-10">
+        <div className="overflow-x-hidden sm:min-h-screen justify-between flex flex-col bg-[#FFF7F1] p-10">
             <div className="flex sinoreta justify-between text-[#FFF7F1] text-4xl">
                 <div>PROJECTS</div>
                 <div>ABOUT ME</div>

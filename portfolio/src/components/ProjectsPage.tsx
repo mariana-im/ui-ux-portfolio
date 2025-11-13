@@ -5,7 +5,7 @@ import {Link} from "react-router-dom"
 
 const ProjectsPage = () => {
     return (
-        <div className="p-15 px-10 sinoreta text-[#FF0080] bg-[#FFF7F1] h-screen flex justify-between">
+        <div className="overflow-x-hidden p-15 px-10 sinoreta text-[#FF0080] bg-[#FFF7F1] h-screen flex justify-between">
             <div className="overflow-hidden relative flex flex-col">
                 <div className="flex flex-col animate-scroll will-change-transform gap-10 text-xl">
                     <div>HTML</div>

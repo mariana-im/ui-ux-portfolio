@@ -4,7 +4,7 @@ import ProjectsPage from './ProjectsPage'
 
 const MainPage = () => {
     return (
-        <div className='overflow-x-hidden'>  
+        <div>  
             <PortfolioPage/>
             <ProjectsPage/>
             <AboutPage/>

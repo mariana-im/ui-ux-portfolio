@@ -4,7 +4,7 @@ import Image3 from '/sazonlocal/image3.png'
 
 const SazonLocal = () => {
     return (
-        <div className="bg-[#FFF4EC] p-20 pb-0 overflow-hidden assistant items-center flex flex-col text-center">
+        <div className="overflow-x-hidden bg-[#FFF4EC] p-20 pb-0 overflow-hidden assistant items-center flex flex-col text-center">
             <div className="pb-5">
                 <div className="sinoreta text-7xl">Sazón Local</div>
                 <div className="text-3xl">Mobile Cooking App</div>

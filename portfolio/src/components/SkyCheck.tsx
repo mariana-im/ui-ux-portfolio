@@ -4,7 +4,7 @@ import Image3 from '/skycheck/image3.png'
 
 const SkyCheck = () => {
     return (
-        <div className="bg-[#FFF4EC] p-20 pb-0 overflow-hidden assistant items-center flex flex-col text-center">
+        <div className="overflow-x-hidden bg-[#FFF4EC] p-20 pb-0 overflow-hidden assistant items-center flex flex-col text-center">
             <div className="pb-5">
                 <div className="sinoreta text-7xl">SkyCheck</div>
                 <div className="text-3xl">Climate Monitoring App</div>

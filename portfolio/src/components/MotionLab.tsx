@@ -4,7 +4,7 @@ import Image3 from '/motionlab/image3.png'
 
 const MotionLab = () => {
     return (
-        <div className="bg-[#FFF4EC] p-20 pb-0 overflow-hidden assistant items-center flex flex-col text-center">
+        <div className="overflow-x-hidden bg-[#FFF4EC] p-20 pb-0 overflow-hidden assistant items-center flex flex-col text-center">
             <div className="pb-5">
                 <div className="sinoreta text-7xl">Motion Lab</div>
                 <div className="text-3xl">Educational Software</div>

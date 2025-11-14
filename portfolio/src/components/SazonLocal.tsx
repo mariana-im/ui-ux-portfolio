@@ -13,9 +13,9 @@ const SazonLocal = () => {
                 <div className="text-2xl">
                     <div className="p-20">Sazón Local is a mobile app prototype that connects users with recipes based on products from a local grocery store. The goal was to encourage home cooking while supporting local commerce.</div>
                     <img className="w-screen" src={Image1}/>
-                    <div className="p-20">Using Figma we created wireframes and an interactive prototype focused on a smooth, mobile-first experience. The design allows users to easily explore recipes, ingredients, and categories through clear navigation and a clean visual style.</div>
+                    <div className="p-20">The user interface and user experience work focused on building a clean, accessible layout with consistent visual hierarchy and mobile-first interactions. Using Figma, we developed wireframes, user flows, and a clickable prototype to create smooth navigation, predictable patterns, and minimal user effort when exploring recipes.</div>
                     <img className='w-screen' src={Image2}/>
-                    <div className="p-20">Sazón Local demonstrates how local businesses can expand their digital presence with an intuitive and engaging platform. The prototype showcases the potential for a real app that benefits users and local markets.</div>
+                    <div className="p-20">This prototype demonstrates how thoughtful interface and experience design can translate local commerce into a digital experience that feels intuitive and easy to use.</div>
                     <img className="w-screen" src={Image3}/>
                 </div>
                 <div className='bg-[#FFF4EC] sinoreta justify-evenly justify-center flex p-5 font-medium'>

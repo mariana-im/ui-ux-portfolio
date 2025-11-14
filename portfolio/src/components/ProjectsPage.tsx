@@ -49,20 +49,20 @@ const ProjectsPage = () => {
                 </div>
             </div>
             <div className="p-5 flex flex-col gap-5 items-center">
-                <div className="text-7xl mb-10">PROJECTS</div>
+                <div className="text-7xl mb-10">Projects</div>
                 <div className="flex flex-col items-center justify-center">
                     <div className='flex gap-10 mb-[10%]'>
                         <Link to="/sazonlocal">
-                            <img className='w-[95%] h-[12rem]' src={SazonLocal}/>
+                            <img className='transition-transform duration-300 hover:scale-103 shadow-xl w-[95%] rounded-[1rem] h-[12rem]' src={SazonLocal}/>
                         </Link>
                         
                         <Link to="/skycheck">
-                            <img className='w-[95%] h-[12rem]' src={SkyCheck}/>
+                            <img className='transition-transform duration-300 hover:scale-103 shadow-xl w-[95%] rounded-[1rem] h-[12rem]' src={SkyCheck}/>
                         </Link>
                     </div>
-                    <div>
+                    <div className=''>
                         <Link to="/motionlab">
-                            <img className='w-[100%] h-[70%]' src={MotionLab}/>
+                            <img className='transition-transform duration-300 hover:scale-103 shadow-xl w-[100%] rounded-[1rem] h-[70%]' src={MotionLab}/>
                         </Link>
                     </div>
                 </div>

@@ -12,7 +12,7 @@ const AboutPage = () => {
                 I love combining creativity with logic, always striving for each project to create a genuine connection with people. </div>
             </div>
             <div className='w-[50%] flex justify-center'>
-                <img className="w-[70%]" src={Myself}/>
+                <img className="w-[70%] shadow-xl rounded-[20%]" src={Myself}/>
             </div>
         </div>
     );

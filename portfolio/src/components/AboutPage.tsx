@@ -2,7 +2,7 @@ import Myself from '/me.png'
 
 const AboutPage = () => {
     return (
-        <div className='overflow-x-hidden h-screen w-screen items-center flex bg-[#FFF7F1] pl-20 gap-10'>
+        <div className='overflow-hidden h-full w-screen items-center flex bg-[#fcfaf7] p-20 pr-0 pl-20 gap-10'>
             <div className='w-[50%]'>
                 <div className='sinoreta text-7xl text-[#FF0080] mb-10'>About Me</div>
                 <div className='assistant text-3xl text-justify'>Hello! I am Mariana Islas a designer that is passionate about creating visual experiences that communicate with intention. <br/><br/> 

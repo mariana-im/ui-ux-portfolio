@@ -5,7 +5,7 @@ import {Link} from "react-router-dom"
 
 const ProjectsPage = () => {
     return (
-        <div className="overflow-x-hidden pt-10 px-10 sinoreta bg-[#FFF7F1] h-screen flex justify-between">
+        <div className="overflow-x-hidden pt-10 px-10 sinoreta bg-[#fcfaf7] h-screen flex justify-between">
             <div className="overflow-hidden relative flex flex-col">
                 <div className="flex flex-col animate-scroll will-change-transform gap-10 text-l">
                     <div>HTML</div>
@@ -20,7 +20,7 @@ const ProjectsPage = () => {
                     <div>GITHUB</div>
                     <div>GAMEMAKER</div>
                     <div>UNREAL ENGINE</div>
-                    
+
                     <div>HTML</div>
                     <div>CSS</div>
                     <div>JAVASCRIPT</div>

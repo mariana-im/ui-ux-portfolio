@@ -1,4 +1,4 @@
-import Myself from '/me.png'
+import Myself from '/qme.png'
 
 const AboutPage = () => {
     return (

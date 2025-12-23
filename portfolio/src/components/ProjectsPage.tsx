@@ -5,7 +5,7 @@ import {Link} from "react-router-dom"
 
 const ProjectsPage = () => {
     return (
-        <div className="overflow-x-hidden pt-10 px-10 sinoreta bg-[#fcfaf7] h-screen flex justify-between">
+        <div className="overflow-hidden pt-10 px-10 sinoreta bg-[#fcfaf7] h-screen flex justify-between">
             <div className="overflow-hidden relative flex flex-col">
                 <div className="flex flex-col animate-scroll will-change-transform gap-10 text-l">
                     <div>HTML</div>
@@ -50,18 +50,18 @@ const ProjectsPage = () => {
             </div>
             <div className="p-5 h-full flex flex-col justify-center items-center">
                 <div className="flex flex-col items-center justify-center">
-                    <div className='flex gap-10 mb-[10%]'>
+                    <div className='flex gap-10 mb-[10%] sm:flex-col lg:flex-row'>
                         <Link to="/sazonlocal">
-                            <img className='transition-transform duration-300 hover:scale-103 shadow-xl w-[95%] rounded-[1rem] h-[12rem]' src={SazonLocal}/>
+                            <img className='transition-transform duration-300 hover:scale-103 shadow-xl w-[18rem] rounded-[1rem] h-[12rem]' src={SazonLocal}/>
                         </Link>
                         
                         <Link to="/skycheck">
-                            <img className='transition-transform duration-300 hover:scale-103 shadow-xl w-[95%] rounded-[1rem] h-[12rem]' src={SkyCheck}/>
+                            <img className='transition-transform duration-300 hover:scale-103 shadow-xl w-[18rem] rounded-[1rem] h-[12rem]' src={SkyCheck}/>
                         </Link>
                     </div>
                     <div className='flex'>
                         <Link to="/motionlab">
-                            <img className='transition-transform duration-300 hover:scale-103 shadow-xl w-[100%] rounded-[1rem] h-[13.2rem]' src={MotionLab}/>
+                            <img className='transition-transform duration-300 hover:scale-103 shadow-xl sm:w-[18rem] sm:h-[12rem] lg:w-[20rem] rounded-[1rem] lg:h-[13.2rem]' src={MotionLab}/>
                         </Link>
                     </div>
                 </div>

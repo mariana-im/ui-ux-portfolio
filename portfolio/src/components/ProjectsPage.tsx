@@ -5,8 +5,8 @@ import {Link} from "react-router-dom"
 
 const ProjectsPage = () => {
     return (
-        <div className="overflow-hidden pt-10 px-10 sinoreta bg-[#fcfaf7] h-screen flex justify-between">
-            <div className="overflow-hidden relative flex flex-col">
+        <div className="overflow-hidden pt-10 px-10 sinoreta bg-[#fcfaf7] sm:h-[50rem] flex justify-center md:justify-between">
+            <div className="overflow-hidden hidden md:block relative flex flex-col">
                 <div className="flex flex-col animate-scroll will-change-transform gap-10 text-l">
                     <div>HTML</div>
                     <div>CSS</div>
@@ -50,7 +50,7 @@ const ProjectsPage = () => {
             </div>
             <div className="p-5 h-full flex flex-col justify-center items-center">
                 <div className="flex flex-col items-center justify-center">
-                    <div className='flex gap-10 mb-[10%] sm:flex-col lg:flex-row'>
+                    <div className='flex gap-10 mb-[10%] flex-col lg:flex-row'>
                         <Link to="/sazonlocal">
                             <img className='transition-transform duration-300 hover:scale-103 shadow-xl w-[18rem] rounded-[1rem] h-[12rem]' src={SazonLocal}/>
                         </Link>
@@ -61,12 +61,12 @@ const ProjectsPage = () => {
                     </div>
                     <div className='flex'>
                         <Link to="/motionlab">
-                            <img className='transition-transform duration-300 hover:scale-103 shadow-xl sm:w-[18rem] sm:h-[12rem] lg:w-[20rem] rounded-[1rem] lg:h-[13.2rem]' src={MotionLab}/>
+                            <img className='transition-transform duration-300 hover:scale-103 shadow-xl w-[18rem] h-[12rem] lg:w-[20rem] rounded-[1rem] lg:h-[13.2rem]' src={MotionLab}/>
                         </Link>
                     </div>
                 </div>
             </div>
-            <div className="overflow-hidden relative text-l text-right">
+            <div className="overflow-hidden hidden md:block relative text-l text-right">
                 <div className="flex flex-col will-change-transform animate-scroll gap-10">
                     <div>GAMEDEV</div>
                     <div>PUBLIC SPEAKING</div>

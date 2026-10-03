@@ -9,17 +9,22 @@ import sazonlocal from "/sazonlocal/image1.png";
 import skycheck from "/skycheck/image1.png";
 import ludicjam from "/ludicjam/image1.png";
 
-const projectRowClass = "lg:flex lg:justify-between relative";
+const projectRowClass = "lg:flex lg:justify-between lg:items-start relative";
 const titleWrapClass =
   "flex gap-10 text-[1.1rem] lg:text-[1.3rem] items-center";
 const titleBlockClass = "flex flex-col min-w-0";
 const bigTitleClass =
   "sinoreta whitespace-nowrap overflow-hidden hover:scale-102 ease-in-out duration-300 transition-transform text-ellipsis text-[3rem] lg:text-[4rem] cursor-pointer";
+// Was: items-center lg:items-start lg:flex-col justify-between mt-1 lg:mt-0
+// `justify-between` combined with the column stretching to match the
+// title block's height meant the gap above "More" shrank/grew depending
+// on whether the tags text wrapped to one or two lines. Fixed gap instead
+// of justify-between keeps the spacing constant regardless of wrapping.
 const tagsWrapClass =
-  "flex items-center lg:items-start lg:flex-col justify-between mt-1 lg:mt-0";
+  "flex items-center justify-between gap-3 lg:items-end lg:flex-col lg:justify-start lg:gap-4 mt-1 lg:mt-0";
 const tagsTextClass = "lg:text-[1.3rem] text-[1.1rem] font-bold";
 const moreButtonClass =
-  "group flex border border-[.15rem] gap-2 justify-center rounded-[1.05rem] px-3 lg:px-4 text-[1.1rem] p-[.4rem] lg:p-2";
+  "group flex border border-[.15rem] gap-2 justify-center rounded-[1.05rem] px-3 lg:px-4 text-[1.1rem] p-[.4rem] lg:p-2 shrink-0";
 const arrowClass =
   "transition-transform duration-300 ease-in-out group-hover:translate-x-1 w-[1.1rem]";
 
@@ -107,7 +112,7 @@ function ProjectRow({ label, title, tags, to, onHoverChange, showHint }) {
         </div>
         <div className={tagsWrapClass}>
           <div className={tagsTextClass}>{tags}</div>
-          <Link to={to} className="self-end">
+          <Link to={to} className="self-end shrink-0">
             <div className={moreButtonClass}>
               <div>More</div>
               <img className={arrowClass} src="Arrow.svg" alt="" />
@@ -152,9 +157,7 @@ export default function Projects({ projectsRef, otherRef }) {
   }
 
   const hoveredData =
-    hovered != null
-      ? [...projects, ...otherProjects][hovered]
-      : null;
+    hovered != null ? [...projects, ...otherProjects][hovered] : null;
 
   return (
     <>

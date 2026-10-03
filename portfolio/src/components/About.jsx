@@ -11,7 +11,7 @@ export default function About({ aboutRef }) {
         About Me
       </div>
       <div className="flex flex-col lg:flex-row items-center justify-center gap-10 lg:gap-40">
-        <div className="lg:w-[45%] items-center flex justify-center text-[2rem] text-justify">
+        <div className="lg:w-[45%] items-center flex justify-center text-[1.2rem] sm:text-[1.4rem] lg:text-[2rem] text-justify">
           Hello! I'm Mariana Islas, a UI/UX designer passionate about creating experiences that are intentional, accessible, and genuinely usable.
  <br /> <br />
 I love combining creativity with logic. Designing with accessibility in mind from the start, then building it myself to make sure that intention carries all the way through.

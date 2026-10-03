@@ -8,6 +8,11 @@ import { useEffect, useRef, useState } from "react";
  * like a quick hand doodle, not a geometric shape — which then joins the
  * floating pool too.
  *
+ * Mobile note: on touch, the first ~8px of movement is used to decide
+ * whether the gesture is a scroll (mostly vertical) or a draw (more
+ * horizontal/diagonal). Only once it's decided to be a draw do we
+ * preventDefault, so vertical swipes still scroll the page normally.
+ *
  * DrawFloat's own root is `relative` (needed for its internal canvas/hint).
  * To use as a full-bleed background layer, wrap it rather than passing
  * `absolute` into className directly:
@@ -30,12 +35,16 @@ export default function DrawFloat({ className = "" }) {
   const simStroke = useRef(null);
   const simTimeoutRef = useRef(null);
 
+  // tracks an in-progress touch gesture before we've decided scroll vs draw
+  const touchState = useRef({ active: false, decided: false, isDraw: false, startX: 0, startY: 0 });
+
   const [hasDrawn, setHasDrawn] = useState(false);
   const rafRef = useRef(null);
 
   const MAX_STROKES = 20;
   const STROKE_COLOR = "#111111";
   const LINE_WIDTH = 2.2;
+  const DECIDE_THRESHOLD = 8; // px of movement before we commit to scroll or draw
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -58,22 +67,10 @@ export default function DrawFloat({ className = "" }) {
     resize();
     window.addEventListener("resize", resize);
 
-    // ---------- manual drawing ----------
-    function getPoint(e) {
+    // ---------- shared helpers ----------
+    function getPoint(clientX, clientY) {
       const rect = canvas.getBoundingClientRect();
-      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
       return { x: clientX - rect.left, y: clientY - rect.top };
-    }
-
-    function pointerDown(e) {
-      isDrawing.current = true;
-      currentStroke.current = [getPoint(e)];
-      setHasDrawn(true);
-    }
-    function pointerMove(e) {
-      if (!isDrawing.current) return;
-      currentStroke.current.push(getPoint(e));
     }
     function finalizeStroke(points) {
       if (points.length < 2) return;
@@ -98,29 +95,89 @@ export default function DrawFloat({ className = "" }) {
         floatingStrokes.current.shift();
       }
     }
-    function pointerUp() {
+
+    // ---------- mouse drawing (desktop) ----------
+    function mouseDown(e) {
+      isDrawing.current = true;
+      currentStroke.current = [getPoint(e.clientX, e.clientY)];
+      setHasDrawn(true);
+    }
+    function mouseMove(e) {
+      if (!isDrawing.current) return;
+      currentStroke.current.push(getPoint(e.clientX, e.clientY));
+    }
+    function mouseUp() {
       if (!isDrawing.current) return;
       isDrawing.current = false;
       finalizeStroke(currentStroke.current);
       currentStroke.current = [];
     }
+    canvas.addEventListener("mousedown", mouseDown);
+    canvas.addEventListener("mousemove", mouseMove);
+    window.addEventListener("mouseup", mouseUp);
 
-    canvas.addEventListener("mousedown", pointerDown);
-    canvas.addEventListener("mousemove", pointerMove);
-    window.addEventListener("mouseup", pointerUp);
-    canvas.addEventListener("touchstart", pointerDown, { passive: true });
-    canvas.addEventListener("touchmove", pointerMove, { passive: true });
-    canvas.addEventListener("touchend", pointerUp);
+    // ---------- touch drawing (mobile) ----------
+    // The first bit of movement decides intent: mostly vertical -> let the
+    // page scroll normally; more horizontal/diagonal -> commit to drawing
+    // and prevent the page from scrolling for the rest of this gesture.
+    function touchStart(e) {
+      const t = e.touches[0];
+      touchState.current = {
+        active: true,
+        decided: false,
+        isDraw: false,
+        startX: t.clientX,
+        startY: t.clientY,
+      };
+    }
+    function touchMove(e) {
+      const ts = touchState.current;
+      if (!ts.active) return;
+      const t = e.touches[0];
+      const p = getPoint(t.clientX, t.clientY);
+
+      if (!ts.decided) {
+        const dx = t.clientX - ts.startX;
+        const dy = t.clientY - ts.startY;
+        const dist = Math.hypot(dx, dy);
+        if (dist < DECIDE_THRESHOLD) return; // not enough movement yet to tell
+
+        ts.decided = true;
+        ts.isDraw = Math.abs(dx) >= Math.abs(dy);
+
+        if (ts.isDraw) {
+          isDrawing.current = true;
+          currentStroke.current = [getPoint(ts.startX, ts.startY), p];
+          setHasDrawn(true);
+          e.preventDefault();
+        }
+        // else: predominantly vertical -> treat as a scroll, do nothing
+        // and let the browser handle it natively
+        return;
+      }
+
+      if (ts.isDraw) {
+        currentStroke.current.push(p);
+        e.preventDefault();
+      }
+      // if decided as a scroll, do nothing for the rest of the gesture
+    }
+    function touchEnd() {
+      const ts = touchState.current;
+      if (ts.isDraw) {
+        isDrawing.current = false;
+        finalizeStroke(currentStroke.current);
+        currentStroke.current = [];
+      }
+      touchState.current = { active: false, decided: false, isDraw: false, startX: 0, startY: 0 };
+    }
+    canvas.addEventListener("touchstart", touchStart, { passive: true });
+    canvas.addEventListener("touchmove", touchMove, { passive: false });
+    canvas.addEventListener("touchend", touchEnd);
+    canvas.addEventListener("touchcancel", touchEnd);
 
     // ---------- lopsided, single-line doodle hearts + stars ----------
-    // Instead of a perfectly symmetric formula, each lobe/point gets its
-    // own randomized size and angle — like a quick freehand doodle, not
-    // a geometric shape. Rendered with quadratic smoothing so the line
-    // is a fluid pen stroke rather than a jagged polyline.
-
     function heartDoodle(cx, cy, scale, rotation) {
-      // asymmetric two-lobe heart: left/right humps independently sized,
-      // bottom point offset sideways, top dip uneven
       const leftW = scale * (9 + Math.random() * 3);
       const rightW = scale * (9 + Math.random() * 3);
       const lobeH = scale * (7 + Math.random() * 2);
@@ -128,18 +185,16 @@ export default function DrawFloat({ className = "" }) {
       const bottomY = scale * (16 + Math.random() * 3);
       const bottomXOffset = scale * (Math.random() - 0.5) * 4;
 
-      // key anchor points, hand-drawn order: start at top dip, go around
-      // left lobe, down to bottom point, up right lobe, back near start
       const raw = [
-        { x: 0, y: -dipDepth }, // top-center dip
-        { x: -leftW * 0.4, y: -lobeH * 1.3 }, // left hump peak
-        { x: -leftW, y: -lobeH * 0.4 }, // left outer widest
-        { x: -leftW * 0.75, y: lobeH * 0.6 }, // left curve down
-        { x: bottomXOffset, y: bottomY }, // bottom point
-        { x: rightW * 0.8, y: lobeH * 0.55 }, // right curve up
-        { x: rightW, y: -lobeH * 0.35 }, // right outer widest
-        { x: rightW * 0.35, y: -lobeH * 1.25 }, // right hump peak
-        { x: rightW * 0.05, y: -dipDepth * 0.9 }, // back near top dip (slight gap, not perfectly closed)
+        { x: 0, y: -dipDepth },
+        { x: -leftW * 0.4, y: -lobeH * 1.3 },
+        { x: -leftW, y: -lobeH * 0.4 },
+        { x: -leftW * 0.75, y: lobeH * 0.6 },
+        { x: bottomXOffset, y: bottomY },
+        { x: rightW * 0.8, y: lobeH * 0.55 },
+        { x: rightW, y: -lobeH * 0.35 },
+        { x: rightW * 0.35, y: -lobeH * 1.25 },
+        { x: rightW * 0.05, y: -dipDepth * 0.9 },
       ];
 
       const cos = Math.cos(rotation);
@@ -155,9 +210,7 @@ export default function DrawFloat({ className = "" }) {
       const pts = [];
       for (let i = 0; i < spikes; i++) {
         const outerAngle =
-          rotation +
-          (i / spikes) * Math.PI * 2 +
-          (Math.random() - 0.5) * 0.35;
+          rotation + (i / spikes) * Math.PI * 2 + (Math.random() - 0.5) * 0.35;
         const outerR = baseOuter * (0.65 + Math.random() * 0.6);
         pts.push({
           x: cx + Math.cos(outerAngle) * outerR,
@@ -174,10 +227,7 @@ export default function DrawFloat({ className = "" }) {
           y: cy + Math.sin(innerAngle) * innerR,
         });
       }
-      // close the loop: return to the starting point so the stroke connects
       pts.push({ x: pts[0].x, y: pts[0].y });
-
-      // small per-point jitter for hand tremor, not a smooth wobble
       return pts.map((p) => ({
         x: p.x + (Math.random() - 0.5) * 2,
         y: p.y + (Math.random() - 0.5) * 2,
@@ -188,25 +238,13 @@ export default function DrawFloat({ className = "" }) {
       const rotation = (Math.random() - 0.5) * 0.4;
       return isHeart
         ? heartDoodle(cx, cy, 3.2 + Math.random() * 1.2, rotation)
-        : starDoodle(
-            cx,
-            cy,
-            24 + Math.random() * 10,
-            9 + Math.random() * 4,
-            rotation
-          );
+        : starDoodle(cx, cy, 24 + Math.random() * 10, 9 + Math.random() * 4, rotation);
     }
 
     function easeInOutQuad(x) {
       return x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2;
     }
 
-    // A person's pen doesn't move at constant speed: it glides fast on
-    // straight stretches and slows/pauses at sharp turns (a star's tip,
-    // a heart's peak). We model that by giving each segment a "cost" —
-    // its pixel length, plus extra cost proportional to how sharp the
-    // turn is at its far end — and reveal the stroke at a constant rate
-    // through cost-space rather than through point-index-space.
     const PAUSE_WEIGHT = 22;
 
     function computeSegmentCosts(points) {
@@ -240,7 +278,6 @@ export default function DrawFloat({ className = "" }) {
             const frac = seg.moveCost > 0 ? Math.max(0, local) / seg.moveCost : 1;
             const x = points[i].x + (points[i + 1].x - points[i].x) * frac;
             const y = points[i].y + (points[i + 1].y - points[i].y) * frac;
-            // tiny tremor on the live pen tip only
             return points
               .slice(0, i + 1)
               .concat([{ x: x + (Math.random() - 0.5) * 0.6, y: y + (Math.random() - 0.5) * 0.6 }]);
@@ -257,7 +294,6 @@ export default function DrawFloat({ className = "" }) {
       simTimeoutRef.current = setTimeout(startAutoDraw, delay);
     }
 
-    // first drawing appears sooner so the page doesn't feel empty on load
     const firstDelay = 400 + Math.random() * 400;
     simTimeoutRef.current = setTimeout(startAutoDraw, firstDelay);
 
@@ -287,12 +323,10 @@ export default function DrawFloat({ className = "" }) {
         segs,
         total,
         start: performance.now(),
-        // ms per unit cost, with a little natural variance in "handwriting speed"
         duration: total * (7 + Math.random() * 3),
       };
     }
 
-    // ---------- smooth rendering (quadratic curve through midpoints) ----------
     function strokeSmoothPath(points, count) {
       const n = Math.min(count, points.length);
       if (n < 2) return;
@@ -311,7 +345,6 @@ export default function DrawFloat({ className = "" }) {
         const midY = (points[i].y + points[i + 1].y) / 2;
         ctx.quadraticCurveTo(points[i].x, points[i].y, midX, midY);
       }
-      // last segment
       ctx.lineTo(points[n - 1].x, points[n - 1].y);
       ctx.stroke();
     }
@@ -325,7 +358,6 @@ export default function DrawFloat({ className = "" }) {
       ctx.strokeStyle = STROKE_COLOR;
       ctx.globalAlpha = 1;
 
-      // floating strokes
       for (const s of floatingStrokes.current) {
         const time = (t - s.born) / 1000;
         let x = s.baseX;
@@ -348,7 +380,6 @@ export default function DrawFloat({ className = "" }) {
         ctx.restore();
       }
 
-      // live manual stroke
       if (isDrawing.current && currentStroke.current.length > 1) {
         ctx.beginPath();
         ctx.moveTo(currentStroke.current[0].x, currentStroke.current[0].y);
@@ -358,9 +389,6 @@ export default function DrawFloat({ className = "" }) {
         ctx.stroke();
       }
 
-      // simulated visitor stroke being "drawn" progressively — speed
-      // follows the shape's geometry (slows at corners, glides on
-      // straights) rather than a constant points-per-second rate
       if (simStroke.current) {
         const s = simStroke.current;
         const progress = Math.min((t - s.start) / s.duration, 1);
@@ -381,12 +409,13 @@ export default function DrawFloat({ className = "" }) {
 
     return () => {
       window.removeEventListener("resize", resize);
-      canvas.removeEventListener("mousedown", pointerDown);
-      canvas.removeEventListener("mousemove", pointerMove);
-      window.removeEventListener("mouseup", pointerUp);
-      canvas.removeEventListener("touchstart", pointerDown);
-      canvas.removeEventListener("touchmove", pointerMove);
-      canvas.removeEventListener("touchend", pointerUp);
+      canvas.removeEventListener("mousedown", mouseDown);
+      canvas.removeEventListener("mousemove", mouseMove);
+      window.removeEventListener("mouseup", mouseUp);
+      canvas.removeEventListener("touchstart", touchStart);
+      canvas.removeEventListener("touchmove", touchMove);
+      canvas.removeEventListener("touchend", touchEnd);
+      canvas.removeEventListener("touchcancel", touchEnd);
       cancelAnimationFrame(rafRef.current);
       clearTimeout(simTimeoutRef.current);
     };
@@ -396,7 +425,7 @@ export default function DrawFloat({ className = "" }) {
     <div ref={containerRef} className={`relative ${className}`}>
       <canvas
         ref={canvasRef}
-        className="absolute inset-0 h-full w-full touch-none"
+        className="absolute inset-0 h-full w-full"
         style={{
           cursor:
             'url(\'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m18 2 4 4-14 14-5 1 1-5Z"/><path d="m14.5 5.5 4 4"/></svg>\') 2 22, crosshair',
